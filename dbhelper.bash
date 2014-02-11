@@ -33,7 +33,8 @@ case $1 in
         mysql --user=$db_user --password=$db_password -e "${q}drop database $db_name${q}"
         mysql --user=$db_user --password=$db_password -e "${q}create database $db_name${q}"
         ;;
-    '*')
+    *)
         mysql --user=$db_user --password=$db_password -e "${q}$1${q}" $db_name
+        ;;
 esac
 #set +o xtrace
