@@ -22,17 +22,21 @@ done < "$configfile"
 #echo $db_user;
 #echo $db_password;
 
+function query {
+    mysql --user=$db_user --password=$db_password -e $1 $db_name
+}
+
 #set -o xtrace
 case $1 in
     'ls')
-        mysql --user=$db_user --password=$db_password -e "show tables" $db_name
+        query "show tables"
         ;;
     'reset')
-        mysql --user=$db_user --password=$db_password -e "drop database $db_name"
-        mysql --user=$db_user --password=$db_password -e "create database $db_name"
+        query "drop database $db_name"
+        query "create database $db_name"
         ;;
     *)
-        mysql --user=$db_user --password=$db_password -e "$1" $db_name
+        query $1
         ;;
 esac
 #set +o xtrace
