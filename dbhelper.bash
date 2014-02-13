@@ -4,6 +4,9 @@
 # db ls - show all tables
 # db cat <table_name> - show all rows in table
 
+# uncomment to show executed commands
+#debug=1
+
 # read config
 # -----------
 # from: http://stackoverflow.com/a/4434930/447661
@@ -18,15 +21,14 @@ do
     fi
 done < "$configfile"
 
-#echo $db_name;
-#echo $db_user;
-#echo $db_password;
+[ -n "$debug" ] && { set -o xtrace; }
 
+# execute query using username/password from config file
+# $1 - query to execute
 function query {
-    mysql --user=$db_user --password=$db_password -e $1 $db_name
+    mysql --user=$db_user --password=$db_password -e "$1" $db_name
 }
 
-#set -o xtrace
 case $1 in
     'ls')
         query "show tables"
@@ -39,4 +41,4 @@ case $1 in
         query $1
         ;;
 esac
-#set +o xtrace
+[ -n "$debug" ] && { set +o xtrace; }
