@@ -49,6 +49,10 @@ case $1 in
         [ -z "$2" ] && { echo "Please specify table"; exit 1; }
         query "drop table $2"
         ;;
+    'desc')
+        [ -z "$2" ] && { echo "Please specify table"; exit 1; }
+        query "describe $2"
+        ;;
     'cat')
         [ -z "$2" ] && { echo "Please specify table"; exit 1; }
         query "select * from $2"
