@@ -26,17 +26,20 @@ done < "$configfile"
 # execute query using username/password from config file
 # $1 - query to execute
 function query {
-    mysql --user=$db_user --password=$db_password -e "$1" $db_name
+    mysql $2 --user=$db_user --password=$db_password -e "$1" $db_name
 }
 
 # same as above, but no db specified
 function query_no_db {
-    mysql --user=$db_user --password=$db_password -e "$1"
+    mysql $2 --user=$db_user --password=$db_password -e "$1"
 }
 
 case $1 in
     'ls')
-        query "show tables"
+        if [ -z "$2" ]
+        then query "show tables"
+        else query "select * from $2"
+        fi
         ;;
     'reset')
         query_no_db "drop database $db_name"
@@ -45,6 +48,10 @@ case $1 in
     'rm')
         [ -z "$2" ] && { echo "Please specify table"; exit 1; }
         query "drop table $2"
+        ;;
+    'cat')
+        [ -z "$2" ] && { echo "Please specify table"; exit 1; }
+        query "select * from $2"
         ;;
     *)
         query $1
