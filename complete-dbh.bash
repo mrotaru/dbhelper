@@ -5,7 +5,7 @@ _dbh()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
-    opts="ls rm reset cat desc"
+    opts="ls rm reset cat desc count"
 
     # read config - from: http://stackoverflow.com/a/4434930/447661
     configfile=".dbhelperrrc"
@@ -19,7 +19,7 @@ _dbh()
     done < "$configfile"
 
     case "${prev}" in
-        "rm" | "cat" | "ls" | "desc" )
+        "rm" | "cat" | "ls" | "desc" | "count" )
             # get table names
             local table_names=$(mysql --user=$db_user --password=$db_password -ss -e'show tables' $db_name)
 

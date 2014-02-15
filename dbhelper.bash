@@ -57,6 +57,10 @@ case $1 in
         [ -z "$2" ] && { echo "Please specify table"; exit 1; }
         query "select * from $2"
         ;;
+    'count')
+        [ -z "$2" ] && { echo "Please specify table"; exit 1; }
+        query "select count(*) from $2" "-ss"
+        ;;
     *)
         query $1
         ;;
