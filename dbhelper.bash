@@ -34,6 +34,15 @@ function query_no_db {
     mysql $2 --user=$db_user --password=$db_password -e "$1"
 }
 
+# show all tables and all rows for each table
+function tree {
+    tables=$(mysql -ss --user=$db_user --password=$db_password -e "show tables" $db_name)
+    for table in $tables; do
+        echo -e "\n"$table
+        query "select * from $table"
+    done
+}
+
 case $1 in
     'ls')
         if [ -z "$2" ]
@@ -60,6 +69,9 @@ case $1 in
     'count')
         [ -z "$2" ] && { echo "Please specify table"; exit 1; }
         query "select count(*) from $2" "-ss"
+        ;;
+    'tree')
+        tree
         ;;
     *)
         query $1
