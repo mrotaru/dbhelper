@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # link to github repository
-remote="https://raw.github.com/mrotaru/dbhelper/master/"
+remote="https://raw.githubusercontent.com/mrotaru/dbhelper/master/"
 
 # which files are to be copied
 files=(
