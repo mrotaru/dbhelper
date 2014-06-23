@@ -67,7 +67,7 @@ case $1 in
         query "select * from $2"
         ;;
     'count')
-        [ -z "$2" ] && { echo "Please specify table"; exit 1; }
+        [ -z "$2" ] && { query "SELECT table_name, TABLE_ROWS FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = \"$db_name\""; exit 0; }
         query "select count(*) from $2" "-ss"
         ;;
     'tree')
