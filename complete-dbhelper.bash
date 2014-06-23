@@ -8,7 +8,7 @@ _dbh()
     opts="ls rm reset cat desc count tree"
 
     # read config - from: http://stackoverflow.com/a/4434930/447661
-    configfile=".dbhelperrrc"
+    configfile=".dbhelperrc"
     shopt -s extglob
     while IFS='= ' read lhs rhs
     do
