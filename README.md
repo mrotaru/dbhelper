@@ -1,4 +1,7 @@
 #DB Helper
+
+**Warning**: this script should not be used on production systems
+
 A wrapper around `mysql`. It requires a `.dbheperrc` file in the current directory which contains the credentials needed to connect to a database. The format is:
 
 ```
