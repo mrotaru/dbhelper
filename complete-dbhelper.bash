@@ -7,8 +7,14 @@ _dbh()
 
     opts="ls rm reset cat desc count tree"
 
-    [ -f "~/.dbhelperrc" ] && configfile="~/.dbhelperrc"
-    [ -f "./.dbhelperrc" ] && configfile="./.dbhelperrc"
+    # config file
+    configfile=""
+    if [ -f "~/.dbhelper_use" ]; then
+        configfile=line=$(head -n 1 "~/.dbhelper_use")
+    else
+        [ -f "~/.dbhelperrc" ] && configfile="~/.dbhelperrc"
+        [ -f "./.dbhelperrc" ] && configfile="./.dbhelperrc"
+    fi
 
     # read config - from: http://stackoverflow.com/a/4434930/447661
     shopt -s extglob

@@ -8,8 +8,13 @@
 #debug=1
 
 # config file
-[ -f "~/.dbhelperrc" ] && configfile="~/.dbhelperrc"
-[ -f "./.dbhelperrc" ] && configfile="./.dbhelperrc"
+configfile=""
+if [ -f "~/.dbhelper_use" ]; then
+    configfile=line=$(head -n 1 "~/.dbhelper_use")
+else
+    [ -f "~/.dbhelperrc" ] && configfile="~/.dbhelperrc"
+    [ -f "./.dbhelperrc" ] && configfile="./.dbhelperrc"
+fi
 
 # read config
 # -----------
@@ -76,6 +81,8 @@ case $1 in
     'tree')
         tree
         ;;
+    'use')
+        echo "$2">"~/.dbhelper_use"
     *)
         query $1
         ;;
