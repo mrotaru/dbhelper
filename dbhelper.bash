@@ -83,6 +83,7 @@ case $1 in
         ;;
     'use')
         echo "$2">"~/.dbhelper_use"
+        ;;
     *)
         query $1
         ;;
