@@ -82,7 +82,16 @@ case $1 in
         tree
         ;;
     'use')
-        echo "$2">"~/.dbhelper_use"
+        [ ! -f ~/.dbhelper_use ] && touch ~/.dbhelper_use
+        echo "$2">~/.dbhelper_use
+        ;;
+    'init')
+        [ ! -f "$2" ] && touch "$2"
+        tee "$2"<<EOF
+db_name=my_database
+db_user=root
+db_password=my_password
+EOF
         ;;
     *)
         query $1
