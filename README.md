@@ -2,7 +2,9 @@
 
 **Warning**: this script should not be used on production systems
 
-A wrapper around `mysql`. It requires a `.dbheperrc` file in the current directory which contains the credentials needed to connect to a database. The format is:
+A wrapper around `mysql`. It requires a `.dbheperrc` file in the current
+directory, or in the user's home directory. It should contain the credentials
+needed to connect to a database. The format is:
 
 ```
 db_name=sequelize
