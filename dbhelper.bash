@@ -7,10 +7,13 @@
 # uncomment to show executed commands
 #debug=1
 
+# config file
+[ -f "~/.dbhelperrc" ] && configfile="~/.dbhelperrc"
+[ -f "./.dbhelperrc" ] && configfile="./.dbhelperrc"
+
 # read config
 # -----------
 # from: http://stackoverflow.com/a/4434930/447661
-configfile=".dbhelperrc"
 shopt -s extglob
 while IFS='= ' read lhs rhs
 do
