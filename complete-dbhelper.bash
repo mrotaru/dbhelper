@@ -5,7 +5,7 @@ _dbh()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
-    opts="ls rm reset cat desc count tree"
+    opts="ls rm reset cat desc count tree use init"
 
     # config file
     configfile=""

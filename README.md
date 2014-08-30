@@ -1,18 +1,32 @@
 #DB Helper
 
-**Warning**: this script should not be used on production systems
+For when you need to shell into `mysql` frequently. To avoid having to type
+the credentials every time, this script reads them from a file and runs the
+query passed as a parameter.
 
-A wrapper around `mysql`. It requires a `.dbheperrc` file in the current
-directory, or in the user's home directory. It should contain the credentials
-needed to connect to a database. The format is:
+To start using it:
+
+`dbhelper.bash init ~/my_database_config`
+
+That will create `~/my_database_config`:
 
 ```
-db_name=sequelize
+db_name=my_database
 db_user=root
-db_password=asdasd
+db_password=my_password
 ```
 
-Once this is done, it can be aliased to something easier to type:
+Then, the file needs to be selected:
+
+`dbhelper.bash use ~/my_database_config`
+
+Once this is done, it should be ready to use:
+
+`dbhelper.bash "delete from Users where id=1;"`
+
+All subsequent queries will be run with the last selected file. Of course,
+multiple config files can be created, and with `use` it is possible to
+alternate between them.
 
 ```
 alias dbh=./dbhelper.bash
