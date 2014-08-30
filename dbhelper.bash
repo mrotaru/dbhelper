@@ -9,8 +9,8 @@
 
 # config file
 configfile=""
-if [ -f "~/.dbhelper_use" ]; then
-    configfile=line=$(head -n 1 "~/.dbhelper_use")
+if [ -f ~/.dbhelper_use ]; then
+    configfile=$(head -n 1 ~/.dbhelper_use)
 else
     [ -f "~/.dbhelperrc" ] && configfile="~/.dbhelperrc"
     [ -f "./.dbhelperrc" ] && configfile="./.dbhelperrc"
@@ -83,6 +83,7 @@ case $1 in
         ;;
     'use')
         [ ! -f ~/.dbhelper_use ] && touch ~/.dbhelper_use
+        echo "using: $2"
         echo "$2">~/.dbhelper_use
         ;;
     'init')

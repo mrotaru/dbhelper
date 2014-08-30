@@ -9,8 +9,8 @@ _dbh()
 
     # config file
     configfile=""
-    if [ -f "~/.dbhelper_use" ]; then
-        configfile=line=$(head -n 1 "~/.dbhelper_use")
+    if [ -f ~/.dbhelper_use ]; then
+        configfile=$(head -n 1 ~/.dbhelper_use)
     else
         [ -f "~/.dbhelperrc" ] && configfile="~/.dbhelperrc"
         [ -f "./.dbhelperrc" ] && configfile="./.dbhelperrc"
