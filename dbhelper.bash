@@ -98,7 +98,7 @@ db_password=my_password
 EOF
         ;;
     *)
-        query $1
+        query "$1"
         ;;
 esac
 [ -n "$debug" ] && { set +o xtrace; }
