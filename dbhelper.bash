@@ -86,6 +86,9 @@ case $1 in
         echo "using: $2"
         echo "$2">~/.dbhelper_use
         ;;
+    'sh')
+        mysql --user=$db_user --password=$db_password $db_name
+        ;;
     'init')
         [ ! -f "$2" ] && touch "$2"
         tee "$2"<<EOF
