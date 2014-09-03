@@ -89,6 +89,12 @@ case $1 in
     'sh')
         mysql --user=$db_user --password=$db_password $db_name
         ;;
+    'export')
+        mysqldump --user=$db_user --password=$db_password $db_name > $2
+        ;;
+    'import')
+        mysql --user=$db_user --password=$db_password $db_name < $2
+        ;;
     'init')
         [ ! -f "$2" ] && touch "$2"
         tee "$2"<<EOF

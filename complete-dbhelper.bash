@@ -5,7 +5,7 @@ _dbh()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
-    opts="ls rm reset cat desc count tree use sh init"
+    opts="ls rm reset cat desc count tree use sh init export import"
 
     # config file
     configfile=""
