@@ -19,15 +19,18 @@ fi
 # read config
 # -----------
 # from: http://stackoverflow.com/a/4434930/447661
-shopt -s extglob
-while IFS='= ' read lhs rhs
-do
-    if [[ $lhs != *( )#* ]]
-    then
-        # you can test for variables to accept or other conditions here
-        declare $lhs=$rhs
-    fi
-done < "$configfile"
+readconfig() {
+    shopt -s extglob
+    while IFS='= ' read lhs rhs
+    do
+        if [[ $lhs != *( )#* ]]
+        then
+            declare $lhs=$rhs
+        fi
+    done < "$configfile"
+}
+
+readconfig "$configfile"
 
 [ -n "$debug" ] && { set -o xtrace; }
 
