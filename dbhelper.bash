@@ -11,7 +11,7 @@
 configfile=""
 if [ -f ~/.dbhelper_use ]; then
     configfile=$(head -n 1 ~/.dbhelper_use)
-else
+#else
     [ -f "~/.dbhelperrc" ] && configfile="~/.dbhelperrc"
     [ -f "./.dbhelperrc" ] && configfile="./.dbhelperrc"
 fi
@@ -20,14 +20,15 @@ fi
 # -----------
 # from: http://stackoverflow.com/a/4434930/447661
 readconfig() {
+    COMMENT_RE='*( )#*'
     shopt -s extglob
     while IFS='= ' read lhs rhs
     do
-        if [[ $lhs != *( )#* ]]
+        if [[ $lhs != $COMMENT_RE ]]
         then
             declare $lhs=$rhs
         fi
-    done < "$configfile"
+    done < "$1"
 }
 
 readconfig "$configfile"
