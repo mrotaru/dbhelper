@@ -11,7 +11,7 @@
 configfile=""
 if [ -f ~/.dbhelper_use ]; then
     configfile=$(head -n 1 ~/.dbhelper_use)
-#else
+else
     [ -f "~/.dbhelperrc" ] && configfile="~/.dbhelperrc"
     [ -f "./.dbhelperrc" ] && configfile="./.dbhelperrc"
 fi
@@ -20,13 +20,15 @@ fi
 # -----------
 # from: http://stackoverflow.com/a/4434930/447661
 readconfig() {
+    [ -n "$debug" ] && echo "reading config file: $configfile"
     COMMENT_RE='*( )#*'
     shopt -s extglob
     while IFS='= ' read lhs rhs
     do
         if [[ $lhs != $COMMENT_RE ]]
         then
-            declare $lhs=$rhs
+            [ -n "$debug" ] && echo "setting: $lhs = $rhs"
+            declare -g $lhs=$rhs
         fi
     done < "$1"
 }
@@ -38,6 +40,7 @@ readconfig "$configfile"
 # execute query using username/password from config file
 # $1 - query to execute
 function query {
+    [ -n "$debug" ] && echo "query: db_name: $db_name"
     mysql $2 --user=$db_user --password=$db_password -e "$1" $db_name
 }
 
