@@ -5,7 +5,6 @@ remote="https://raw.githubusercontent.com/mrotaru/dbhelper/master/"
 
 # which files are to be copied
 files=(
- .dbhelperrc
  complete-dbhelper.bash
  dbhelper.bash
  )
