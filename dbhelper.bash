@@ -16,6 +16,9 @@ else
     [ -f "./.dbhelperrc" ] && configfile="./.dbhelperrc"
 fi
 
+[ -z $configfile ] && [ $1 != "init" ] && [ $1 != "use" ] && { echo "No config file, cannot connect to database."; exit 1; }
+[ -z $configfile ] && [ $1 == "init" ] && [ -z $2 ] && { echo "Please provide a name: dbhelper.bash init <my_database>"; exit 1; }
+
 # read config
 # -----------
 # from: http://stackoverflow.com/a/4434930/447661
@@ -33,7 +36,7 @@ readconfig() {
     done < "$1"
 }
 
-readconfig "$configfile"
+[ $1 != "init" ] && [ $1 != "use" ] && readconfig "$configfile"
 
 [ -n "$debug" ] && { set -o xtrace; }
 
