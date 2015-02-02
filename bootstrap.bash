@@ -26,6 +26,7 @@ function get_file()
         "curl") curl -s --write-out "%{url_effective} %{http_code}\n" -O "$1" ;;
         "wget") wget --no-verbose "$1" -O "$2" ;;
     esac
+    [ ! $? ] && { echo "$get_method failed. Exiting..."; exit 1; } 
 }
 
 # iterate over $files, build URL and download each one
