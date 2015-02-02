@@ -112,6 +112,9 @@ db_name=my_database
 db_user=root
 db_password=my_password
 EOF
+        [ ! -f ~/.dbhelper_use ] && touch ~/.dbhelper_use
+        echo "using: $2"
+        echo "$2">~/.dbhelper_use
         ;;
     *)
         query "$1"
