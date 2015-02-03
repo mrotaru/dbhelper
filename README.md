@@ -4,7 +4,14 @@ For when you need to shell into `mysql` frequently. To avoid having to type
 the credentials every time, this script reads them from a file and runs the
 query passed as a parameter.
 
-To start using it:
+Install in current directory:
+
+```
+curl http://goo.gl/ZZqD91 -L -o - | bash 
+sudo chmod +x dbhelper.bash
+```
+
+Setup credentials for a database:
 
 `dbhelper.bash init ~/my_database_config`
 
@@ -16,37 +23,29 @@ db_user=root
 db_password=my_password
 ```
 
-Then, the file needs to be selected:
+This file needs to be updated with the correct credentials. Mutliple such files can
+be created with `init`; the last created one will be automatically used. To use a different
+one: `dbheper.bash use ~/another_db_config` (this will simply write `~/another_db_config` to
+`~/.dbhelper_use`, which is read by `dbheper` every time it runs).
 
-`dbhelper.bash use ~/my_database_config`
+Usage:
 
-Once this is done, it should be ready to use:
-
+```
+dbhelper.bash ls - show all tables
+dbhelper.bash reset - will drop the database and then create it
+dbhelper.bash rm <table> - drop table
+dbhelper.bash desc <table> - describe table
+dbhelper.bash cat <table> - show all rows in table
+dbhelper.bash count <table> - count all rows in table
+dbhelper.bash tree - show all tables and all rows
 `dbhelper.bash "delete from Users where id=1;"`
+```
 
-All subsequent queries will be run with the last selected file. Of course,
-multiple config files can be created, and with `use` it is possible to
-alternate between them.
+There's also a bash completion script which will auto-complete table names.
+Note that it assumes `dbhelper.bash` as aliased as `dbh`. Also, completed table
+names are case-sensitive, unfortunatelly. To enable auto-completion:
 
 ```
 alias dbh=./dbhelper.bash
-```
-
-Then, the following commands can be run:
-
-````
-dbh ls - show all tables
-dbh reset - will drop the database and then create it
-dbh rm <table> - drop table
-dbh desc <table> - describe table
-dbh cat <table> - show all rows in table
-dbh count <table> - count all rows in table
-dbh tree - show all tables and all rows
-````
-
-There's also a bash completion script which will auto-complete table names. Note
-that it assumes `dbhelper.bash` as aliased as `dbh`. Also, completed table names are case-sensitive, unfortunatelly. To enable auto-completion:
-
-```
 source complete-dbhelper.bash
 ```
