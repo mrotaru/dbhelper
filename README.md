@@ -38,11 +38,11 @@ dbhelper.bash desc <table> - describe table
 dbhelper.bash cat <table> - show all rows in table
 dbhelper.bash count <table> - count all rows in table
 dbhelper.bash tree - show all tables and all rows
-`dbhelper.bash "delete from Users where id=1;"`
+dbhelper.bash "delete from Users where id=1;"
 ```
 
 There's also a bash completion script which will auto-complete table names.
-Note that it assumes `dbhelper.bash` as aliased as `dbh`. Also, completed table
+Note that it assumes `dbh` is aliased to `dbheper.bash`. Also, completed table
 names are case-sensitive, unfortunatelly. To enable auto-completion:
 
 ```
